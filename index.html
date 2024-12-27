@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibin Enterprises Private Limited</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #222;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background: #444;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        h1, h2 {
+            text-align: center;
+            color: white;
+        }
+        .company-name {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .form-item {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            color: white;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #666;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #333;
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+        input:focus {
+            outline: none;
+            border: 1px solid white;
+            background: #555;
+            animation: glow 1.5s infinite alternate;
+        }
+        input.filled {
+            background-color: white;
+            color: #333;
+        }
+        input.filled:focus {
+            border: 1px solid #333;
+            background: white;
+            animation: none;
+        }
+        button {
+            background-color: white;
+            color: #333;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: white;
+            color: #333;
+        }
+        button.clicked {
+            background-color: #00aa00;
+            color: white;
+            animation: scaleUp 0.3s ease-out;
+        }
+        .invoice {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid #666;
+            border-radius: 8px;
+            background-color: #333;
+            color: white;
+            display: none;
+            animation: slideIn 1s ease;
+        }
+        .invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #222;
+        }
+        .invoice th, .invoice td {
+            border: 1px solid #666;
+            padding: 10px;
+            text-align: center;
+            color: white;
+        }
+        .customer-details {
+            margin-bottom: 20px;
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+        @media print {
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #fff;
+                color: #000;
+            }
+            .container {
+                width: 100%;
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+                border-radius: 0;
+            }
+            .actions {
+                display: none;
+            }
+            .invoice {
+                border: none;
+                padding: 0;
+            }
+            .invoice h1, .invoice h2 {
+                text-align: center;
+                color: #000;
+            }
+            table {
+                border: 1px solid #000;
+            }
+            th, td {
+                border: 1px solid #000;
+                padding: 10px;
+                text-align: center;
+            }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes glow {
+            from { box-shadow: 0 0 5px white; }
+            to { box-shadow: 0 0 15px white; }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="company-name"><u>Vibin Enterprises Private Limited</u></div>
+        <h3><u>Invoice Details :</u></h3>
+        <form id="customer-form">
+             
+            <div class="form-container">
+                <div class="form-item">
+                    <label for="customer-name">Customer Name:</label>
+                    <input type="text" id="customer-name" required>
+                </div>
+                <div class="form-item">
+                    <label for="customer-address">Customer Address:</label>
+                    <input type="text" id="customer-address" required>
+                </div>
+                <div class="form-item">
+                    <label for="customer-phone-number">Customer Phone Number:</label>
+                    <input type="text" id="customer-phone-number" required>
+                </div>
+                <div class="form-item">
+                    <label for="billing-date">Billing Date:</label>
+                    <input type="date" id="billing-date" required>
+                </div>
+            </div>
+            
+            <div id="item-container" class="form-container">
+                <div class="form-item">
+                    <label for="item-name">Item Name:</label>
+                    <input type="text" id="item-name" required>
+                </div>
+                <div class="form-item">
+                    <label for="item-price">Price:</label>
+                    <input type="number" id="item-price" required>
+                </div>
+                <div class="form-item">
+                    <label for="item-quantity">Quantity:</label>
+                    <input type="number" id="item-quantity" required>
+                </div>
+                <div class="form-item">
+                    <label for="item-tax">Tax %:</label>
+                    <input type="number" id="item-tax" required>
+                </div>
+            </div>
+             
+            <div class="buttons-container">
+                <button type="button" onclick="addItem()">Add Another Item</button>
+                <button type="button" onclick="generateInvoice()" id="submit-btn">Submit Invoice</button>
+            </div>
+        </form>
+         
+        <div class="invoice" id="invoice">
+            <h1><u>Vibin Enterprises Private Limited</u></h1>
+            <h2><u>Invoice</u></h2>
+            <div class="invoice-container">
+                <div class="details">
+                    <div style="text-align:right">
+                        <p><b>Invoice No:</b> <span id="invoice-no"></span></p>
+                        <p><b>Date:</b> <span id="display-billing-date"></span></p>
+                    </div>
+                    <div>
+                        <strong><u>Supplier Company INC :</u></strong>
+                        <p><b>Name:</b> Vibin Enterprises Private Limited</p>
+                        <p><b>Phone Number:</b> 9342149726</p>
+                        <p><b>Address:</b> 4/164, 27-Nehru Street, Pollachi, Coimbatore - 642205.</p>
+                    </div>
+                </div>
+                <div class="customer-details" id="customer-details">
+                    <strong><u>Customer Details :</u></strong>
+                    <p><strong>Customer Name:</strong> <span id="display-customer-name"></span></p>
+                    <p><strong>Customer Address:</strong> <span id="display-customer-address"></span></p>
+                    <p><strong>Customer Phone Number:</strong> <span id="display-customer-phone-number"></span></p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Tax</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="invoice-body"></tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5"><strong>Grand Total</strong></td>
+                            <td id="grand-total">Rs.0.00</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div style="text-align:center;"> 
+                    <p><b>Thank You! Visit Again!!</b></p>
+                    <footer>
+                        <b>&copy; 2024 Vibin Enterprises Private Limited. All the rights are reserved.</b>
+                    </footer>
+                </div>
+                <footer>
+                    <div class="details">
+                    <div> 
+                    <p><b><u>Online Payment Details:</u></b></p>                  
+                    <p>Bank : South Indian Bank</p>
+                    <p>Account Name : Vibin Enterprises</p>
+                    <p>Account Number : 123456678</p>
+                    <p>IFSC Code : SIDB0002131</p>
+                    <p>Gpay Number : 9342149892</p>
+                    <p>Phone Pay Number : 9342149892</p>
+                    <p>Paytm Number : 9342149892</p> 
+                    </div>
+                </footer>
+                <div class="actions">
+                    <button onclick="printInvoice()">Print Invoice</button>
+                    <button onclick="downloadInvoice()">Download Invoice</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let items = [];
+        let invoiceCounter = 1000;
+
+        function addItem() {
+            const itemName = document.getElementById('item-name').value;
+            const itemPrice = parseFloat(document.getElementById('item-price').value);
+            const itemQuantity = parseInt(document.getElementById('item-quantity').value);
+            const itemTax = parseFloat(document.getElementById('item-tax').value);
+            if (itemName && itemPrice && itemQuantity && itemTax) {
+                const total = (itemPrice * itemQuantity) + (itemPrice * itemQuantity * itemTax / 100);
+                items.push({ name: itemName, price: itemPrice, quantity: itemQuantity, tax: itemTax, total: total });
+                document.getElementById('item-name').value = '';
+                document.getElementById('item-price').value = '';
+                document.getElementById('item-quantity').value = '';
+                document.getElementById('item-tax').value = '';
+            } else {
+                alert('Please fill in all fields.');
+            }
+        }
+
+        function generateInvoice() {
+            const customerName = document.getElementById('customer-name').value;
+            const customerAddress = document.getElementById('customer-address').value;
+            const customerPhoneNumber = document.getElementById('customer-phone-number').value;
+            const billingDate = document.getElementById('billing-date').value;
+
+            document.getElementById('display-customer-name').textContent = customerName;
+            document.getElementById('display-customer-address').textContent = customerAddress;
+            document.getElementById('display-customer-phone-number').textContent = customerPhoneNumber;
+            document.getElementById('display-billing-date').textContent = billingDate;
+            document.getElementById('invoice-no').textContent = `INV-${invoiceCounter++}`;
+
+            const invoiceBody = document.getElementById('invoice-body');
+            const grandTotal = document.getElementById('grand-total');
+            invoiceBody.innerHTML = '';
+            let totalAmount = 0;
+            let serialNo = 1;
+
+            items.forEach(item => {
+                const row = `<tr>
+                    <td>${serialNo++}</td>
+                    <td>${item.name}</td>
+                    <td>Rs.${item.price.toFixed(2)}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.tax}%</td>
+                    <td>Rs.${item.total.toFixed(2)}</td>
+                </tr>`;
+                invoiceBody.innerHTML += row;
+                totalAmount += item.total;
+            });
+
+            grandTotal.textContent = `Rs.${totalAmount.toFixed(2)}`;
+
+            
+            const invoiceElement = document.getElementById('invoice');
+            invoiceElement.style.display = 'block';
+            invoiceElement.classList.add('slideIn');
+            
+            
+            document.getElementById('submit-btn').classList.add('clicked');
+        }
+
+        function printInvoice() {
+            const printContents = document.getElementById('invoice').innerHTML;
+            const originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+            location.reload();
+        }
+        function downloadInvoice() {
+            const element = document.createElement('a');
+            let invoiceText = 'Invoice\n\n';
+            const customerName = document.getElementById('customer-name').value;
+            const customerAddress = document.getElementById('customer-address').value;
+            const customerPhoneNumber = document.getElementById('customer-phone-number').value;
+            const billingDate = document.getElementById('billing-date').value;
+
+            invoiceText += `Billing Date: ${billingDate}\n`;
+            invoiceText += `Customer Name: ${customerName}\n`;
+            invoiceText += `Customer Address: ${customerAddress}\n`;
+            invoiceText += `Customer Phone Number: ${customerPhoneNumber}\n\n`;
+
+            items.forEach(item => {
+                invoiceText += `Item: ${item.name}, Price: Rs.${item.price}, Quantity: ${item.quantity}, Tax: ${item.tax}%, Total: Rs.${item.total.toFixed(2)}\n`;
+            });
+
+            invoiceText += `\nGrand Total: Rs.${items.reduce((sum, item) => sum + item.total, 0).toFixed(2)}`;
+
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(invoiceText));
+            element.setAttribute('download', 'invoice.txt');
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                if (input.value.trim() !== '') {
+                    input.classList.add('filled');
+                } else {
+                    input.classList.remove('filled');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
